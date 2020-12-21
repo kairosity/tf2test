@@ -35,7 +35,8 @@ function confirmDeletion() {
 	}
 	confirmDeletionModal.style.display = "none";
 	list.setDataToLocalStorage();
-	timer.makeArrayElementsKeyboardTabbableAgain();
+    timer.makeArrayElementsKeyboardTabbableAgain();
+    location.reload();
 }
 /**
  * This function runs when a user cancels a task deletion. 
@@ -44,7 +45,8 @@ function confirmDeletion() {
 function negateDeletion() {
 	confirmDeletionModal.style.display = "none";
 	timer.makeArrayElementsKeyboardTabbableAgain();
-	taskToDel = "";
+    taskToDel = "";
+    location.reload();
 }
 // --------------------------------------CLASSES-------------------------------//
 class Timer {
