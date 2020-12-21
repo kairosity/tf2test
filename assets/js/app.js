@@ -1,4 +1,5 @@
 
+  
 // --------------------------------------GLOBAL VARIABLES-------------------------------//
 var taskToDel = "";
 let confirmDeletionModal = document.getElementById('confirm-deletion-modal');
@@ -1146,7 +1147,7 @@ class Timer {
 	 * If the X close button is clicked the pages reverts as it was before.
 	 */
 	appInformation() {
-		let infoIcon = document.querySelector('#info');
+		let infoIcon = document.querySelector('.fa-question-circle');
 		let infoModal = document.querySelector('#information-modal');
 		infoIcon.addEventListener('keyup', function(event) {
 			if (event.keyCode === 13) {

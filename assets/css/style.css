@@ -1,3 +1,9 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
 
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Secular+One&display=swap');
 * {
@@ -270,10 +276,7 @@ h2.sub-heading {
 	top: 15px;
 	right: 15px;
 	font-size: 2em;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background-color: transparent;
+	cursor: pointer;
 }
 #information-modal {
 	width: 85%;
@@ -423,12 +426,9 @@ h2.sub-heading {
 	-ms-grid-column-align: center;
 	justify-self: center;
 }
-.timer-controls button {
+.timer-controls a {
 	color: var(--pure-white);
-    font-size: 2em;
-    outline: none;
-    border: none;
-    background-color: transparent;
+	font-size: 2em;
 }
 .timer-box h2 {
 	font-family: "Heebo", sans-serif;
@@ -1089,14 +1089,7 @@ input.editTime:focus {
 	outline: var(--dark-blue) dashed 4px;
 }
 /*----------------------------------------------------------- Charts   */
-#chart-label,
-#chart-selections-label,
-#total-time-focused-label,
-#total-time-focused-today-label,
-#tasks-completed-label,
-#tasks-completed-today-label{
-    display: none;
-}
+
 .focus-summary-container {
 	-ms-grid-row: 7;
 	-ms-grid-row-span: 1;
@@ -1801,3 +1794,4 @@ footer {
 		font-size: 14px;
 	}
 }
+
