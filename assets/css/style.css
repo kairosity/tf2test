@@ -33,15 +33,6 @@
     grid-template-rows: 150px auto auto 1fr;
     position: relative;
 }
-/*----------------------------------------------------------- Timer  */
-
-/* #tests-heading {
-    padding: 1.2em;
-}
-.tests-body {
-    text-align: center;
-} */
-
 /*----------------------------------------------------------- Header  */
 .main-header{
     background-color: var(--sun-yellow);
@@ -51,10 +42,10 @@
     align-items: center;
     grid-column: 1 / 13;
     justify-content: center;
-    -webkit-box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
+    /* -webkit-box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
     box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
-    border-radius: 8px;
+    border-radius: 8px; */
 }
 
 .main-heading {
@@ -66,6 +57,30 @@
     text-align: center;
 }
 
+h2.sub-heading {
+    font-family: "Heebo", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+/*------------- Skip Tasks Link: Accessibility for keyboard users. */
+
+#skip-tasks {
+	position: absolute;
+	top: 160px;
+	left: 45%;
+	font-size: 15px;
+    font-family: "Heebo", sans-serif;
+	color: var(--pure-white);
+	text-transform: uppercase;
+    pointer-events: none;
+    cursor: default;
+}
+#skip-tasks:focus {
+	color: var(--pure-black);
+}
 
 
 /*----------------------------------------------------------- Timer  */
@@ -225,6 +240,60 @@
 #save-time-to-task:focus{
     outline: var(--sun-yellow) dashed 4px;
 }
+
+.silent-alarm{
+    width: 100%;
+    height: 100%;
+    z-index: 1002;
+    position: fixed;
+    opacity: 1;
+    top: 0px;
+    left: 0px;
+    animation: flashing-colours 15s linear;
+    animation-iteration-count: infinite;
+
+}
+
+
+@keyframes flashing-colours{
+		100%,0%{
+			background-color: var(--dark-blue);
+		}
+		8%{
+			background-color: var(--light-blue);
+		}
+		16%{
+			background-color: var(--grass-green);
+		}
+		25%{
+			background-color: var(--sun-yellow);
+		}
+		33%{
+			background-color: var(--orange);
+		}
+		41%{
+			background-color: var(--coral);
+		}
+		50%{
+			background-color: var(--happy-pink);
+		}
+		58%{
+			background-color: var(--purple-blush);
+		}
+		66%{
+			background-color: var(--strong-lavendar)
+		}
+		75%{
+			background-color: var(--pure-black)
+		}
+		83%{
+			background-color: var(--pure-white)
+		}
+		91%{
+			background-color: var(--happy-pink);
+		}
+}
+
 
 
 /*----------------------------------------------------------- Popover Options Box  */
@@ -462,8 +531,6 @@ li.task-description{
     background: linear-gradient(110deg, var(--dark-blue), var(--light-blue), var(--grass-green), var(--sun-yellow), var(--orange), var(--coral), var(--happy-pink), var(--strong-lavendar), var(--purple-blush));
     transform: scale(1.1);
 }
-
-
 .completed {
     text-decoration: line-through;
     text-decoration-color: var(--pure-black);
@@ -730,11 +797,11 @@ input.editTime:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    -webkit-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
+    /* -webkit-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
     box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
     border-radius: 8px;
-    border: 2px solid var(--pure-black);
+    border: 2px solid var(--pure-black); */
     margin-bottom: 50px;
     padding: 0.6em;
 }
@@ -749,7 +816,7 @@ input.editTime:focus {
 #chart-selections{
     width: 90%;
     height: 60px;
-    padding: 1em;
+    padding: 0.5em;
     background-color: var(--sun-yellow);
     -webkit-box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 0px 6px 0px 0px rgba(0,0,0,1);
@@ -759,8 +826,8 @@ input.editTime:focus {
     margin-bottom: 50px;
     font-family: "Secular One", sans-serif;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.7em;
+    letter-spacing: 0.5px;
+    font-size: 11px;
     font-weight: 400;
     justify-self: center;
     align-self: center;
@@ -806,12 +873,7 @@ input.editTime:focus {
     grid-column: 1/2;
 }
 svg {
-    /* border: 2px solid #000000; */
     border-radius: 8px;
-    padding: 2em;
-    /* -webkit-box-shadow: 2px 6px 0px 0px rgba(0,0,0,1);
-    -moz-box-shadow: 2px 6px 0px 0px rgba(0,0,0,1);
-    box-shadow: 2px 6px 0px 0px rgba(0,0,0,1); */
 }
 
 svg.legend-area{
@@ -856,20 +918,27 @@ div.tooltip-donut {
 .completed-tasks{
     text-align: left;
     align-self: flex-start;
+    margin: 0 auto;
     padding: 1em;
     font-family: "Heebo", sans-serif;
     font-size: 1em;
 }
 
+::marker {
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+
 /*----------------------------------------------------------- Modals  */
 
-/* Close Timer Without Saving Modal */
+/* Modal Framework */
 .modal,
 #save-time-to-task-modal,
-#countdown-ended-modal {
+#countdown-ended-modal,
+#enter-task-modal {
   display: none; 
   position: fixed; 
-  z-index: 1002; 
+  z-index: 1003; 
   left: 0;
   top: 0;
   width: 100%; 
@@ -948,6 +1017,8 @@ div.tooltip-donut {
 .ce-negate-button:focus {
     outline: var(--dark-blue) dashed 4px;
 }
+/* The "Please enter a valid task modal" */
+
 
 /*----------------------------------------------------------- Footer   */
 
@@ -960,8 +1031,8 @@ footer {
     grid-column: 1 / 13;
     grid-row: 8/9;
     justify-content: center;
-    border-top: 5px solid var(--pure-black);
-    border-radius: 8px;
+    /* border-top: 5px solid var(--pure-black);
+    border-radius: 8px; */
 }
 
 /*----------------------------------------------------------- MEDIA QUERIES: Small Screens   */
@@ -969,6 +1040,14 @@ footer {
 
 .page-container {
     grid-template-rows: 170px auto auto 1fr;   
+}
+
+/*----------------------------------------------------------- Skip Tasks Small Screens  */
+
+#skip-tasks {
+	top: 190px;
+	left: 80%;
+	font-size: 20px;
 }
 
 /*----------------------------------------------------------- Timer Small Screens  */
@@ -1042,25 +1121,6 @@ input.editedTask {
     grid-column-gap: 0.5em;
     justify-content: center;
 }
-/* .task:not(:last-child):after {
-  content:'';
-  display:inline-block;
-  width:100%; 
-  height:100%;
-  border-bottom:1px solid var(--pure-black);
-  grid-column: 1 / 13;
-  margin-top: 11px;
-}
-.task:last-child:after{
-    content: '';
-    display:inline-block;
-    width:100%; 
-    height:100%;
-    border-bottom:0px solid var(--pure-black);
-    grid-column: 1 / 13;
-    margin-bottom: -27px;
-    
-} */
 .task:last-child{
     padding-bottom: 0.1em;
 }
@@ -1090,7 +1150,7 @@ input.editedTask {
   border: 2px solid var(--pure-black);
   border-radius: 8px;
   width: 350px;
-  height: 150px;
+  /* height: 150px; */
   -webkit-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
   -moz-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
   box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
@@ -1120,11 +1180,11 @@ input.editTime{
 }
 /*----------------------------------------------------------- Charts - Small Screens  */
 #charts{
-    border: 2px solid var(--pure-black);
+    /* border: 2px solid var(--pure-black);
     border-radius: 8px;
     -webkit-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
-    box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
+    box-shadow: 3px 5px 0px 0px rgba(0,0,0,1); */
     margin-bottom: 50px;
     width: 70%;
 }
@@ -1135,7 +1195,7 @@ input.editTime{
     padding: 1em;
     font-family: "Heebo", sans-serif;
     font-size: 1em;
-    margin: 20px;
+    margin: 0 auto;
 }
 
 div.tooltip-donut {									
@@ -1159,7 +1219,13 @@ div.tooltip-donut {
 .main-heading {
     font-size: 2.7rem;
 }
+/*----------------------------------------------------------- Skip Tasks Medium Screens  */
 
+#skip-tasks {
+	top: 220px;
+	left: 81%;
+	font-size: 20px;
+}
 /*----------------------------------------------------------- Timer Medium Screens  */
 .timer-container {
     grid-column: 3 / 11;
@@ -1222,6 +1288,13 @@ div.tooltip-donut {
 .main-heading {
     font-size: 3rem;
 }
+/*----------------------------------------------------------- Skip Tasks Large Screens  */
+
+#skip-tasks {
+	top: 18.5%;
+	left: 81%;
+	font-size: 30px;
+}
 
 /*----------------------------------------------------------- Timer Large Screens  */
 
@@ -1260,6 +1333,7 @@ div.tooltip-donut {
 .completed-tasks{
     grid-row: 1/2;
     grid-column: 1/3;
+    margin: 0 auto;
 }
 
 }
@@ -1273,9 +1347,24 @@ div.tooltip-donut {
 .main-heading {
     font-size: 3.3rem;
 }
+/*----------------------------------------------------------- Skip Tasks Extra-Large Screens  */
+
+#skip-tasks {
+	top: 250px;
+	left: 78%;
+	font-size: 30px;
+}
 /*----------------------------------------------------------- Charts Extra-Large Screens  */
 svg.legend-area{
     font-size: 0.9em;
 }
 
+}
+
+@media screen and (max-width: 340px) {
+    #skip-tasks {
+	top: 13%;
+	font-size: 14px;
+    
+}
 }

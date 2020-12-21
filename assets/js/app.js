@@ -1,5 +1,4 @@
 
-  
  
 class Timer {
     constructor(){
@@ -124,8 +123,8 @@ class Timer {
 //Countdown 15 Play
     function countDown15Play(){
 
-        seconds = 0;
-        minutes = 15;
+        seconds = 3; /// CHANGE THIS BACK WHEN BUG FIXED
+        minutes = 0;
         hours = 0;
         countdown();
     }
@@ -145,10 +144,16 @@ class Timer {
             if (alarmButton.innerHTML == `<i class="fas fa-bell-slash" aria-hidden="true"></i>`){
             alarm.muted == true;
             clearInterval(countdownInt);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            
             countdownEnded();        
         } else {
-            alarm.play()
             clearInterval(countdownInt);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
             countdownEnded();
         }      
         }
@@ -302,6 +307,8 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                             $(countdown15Button).bind('click keyup', function(event){
                           
                                 if((event.type === 'click') || (event.keyCode === 13)) {
+                                        alarm.play()
+                                        alarm.pause()
                                         countdownClickStartHelper("countdown15", 15);
                                         countDown15Play()
                                         pauseOnClick(countdownInt); 
@@ -398,6 +405,9 @@ function countdownClickStartHelper(countdownType, countdownNumber){
             }       
     }      
     function countdownEnded(){ 
+        if (alarmButton.innerHTML == `<i class="fas fa-bell" aria-hidden="true"></i>`){
+            alarm.play()
+        }
         playing = false;  
         let countdownEndedModal = document.getElementById('countdown-ended-modal');
         countdownEndedModal.style.display = "block";
@@ -407,14 +417,26 @@ function countdownClickStartHelper(countdownType, countdownNumber){
         let typeOfTimer = document.querySelector('.timer-title');
         let thisTask = timerTitle.textContent;
 
+        
+
         if (typeOfTimer.textContent == "Countdown 15"){
             messageElement.textContent = `Congrats! You've worked for the full 15 minutes! Do you want to save 15 minutes to the task: ${thisTask}?`
+            if (alarmButton.innerHTML == `<i class="fas fa-bell-slash" aria-hidden="true"></i>`){
+               timer.addSilentAlarm() 
+            }
+            
             clearInterval(countdownInt);
         } else if (typeOfTimer.textContent == "Countdown 25"){
             messageElement.textContent = `Congrats! You've worked for the full 25 minutes! Do you want to save 25 minutes to the task: ${thisTask}?`;
+            if (alarmButton.innerHTML == `<i class="fas fa-bell-slash" aria-hidden="true"></i>`){
+               timer.addSilentAlarm() 
+            }
             clearInterval(countdownInt);
         }
             confirmButton.addEventListener('click', function(){
+                 if (alarmButton.innerHTML == `<i class="fas fa-bell-slash" aria-hidden="true"></i>`){
+                    timer.removeSilentAlarm() 
+                } 
                 countdownEndedModal.style.display = "none"; 
 
                 //calls save time function which will save seconds and long form time on the associated task object.
@@ -444,6 +466,9 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                 hours = 0;     
             })
             negateButton.addEventListener('click', function(){
+                if (alarmButton.innerHTML == `<i class="fas fa-bell-slash" aria-hidden="true"></i>`){
+                    timer.removeSilentAlarm() 
+                }
                 clearInterval(countdownInt);
                 countdownEndedModal.style.display = "none";
                 removeTimerFromDom();
@@ -470,9 +495,31 @@ function countdownClickStartHelper(countdownType, countdownNumber){
             let confirmButton = document.querySelector('.confirm-button');
             let negateButton = document.querySelector('.negate-button');
 
+            let alarmButton = document.querySelector('#alarm-on');
+            let pauseButton = document.querySelector('#pause');
+            let playButton = document.querySelector('#play');
+            let resetButton = document.querySelector('#reset');
+            let closeTimerX = document.querySelector('.close-timer-x');
+
+            saveButton.setAttribute("tabindex", "-1");
+            alarmButton.setAttribute("tabindex", "-1");
+            pauseButton.setAttribute("tabindex", "-1");
+            playButton.setAttribute("tabindex", "-1");
+            resetButton.setAttribute("tabindex", "-1");
+            closeTimerX.setAttribute("tabindex", "-1");
+
+
             confirmButton.addEventListener('click', function(){
             
-            closeTimerModal.style.display = "none";  
+            closeTimerModal.style.display = "none";
+            
+            saveButton.setAttribute("tabindex", "0");
+            alarmButton.setAttribute("tabindex", "0");
+            pauseButton.setAttribute("tabindex", "0");
+            playButton.setAttribute("tabindex", "0");
+            resetButton.setAttribute("tabindex", "0");
+            closeTimerX.setAttribute("tabindex", "0");
+            
                 //if user clicks X in the middle of timer playing then I need to pause it first
             let intervalToPause;
             let typeOfTimer = document.querySelector('.timer-title').textContent;
@@ -491,7 +538,13 @@ function countdownClickStartHelper(countdownType, countdownNumber){
             
             })
             negateButton.addEventListener('click', function(){
-                closeTimerModal.style.display = "none"; 
+            closeTimerModal.style.display = "none"; 
+            saveButton.setAttribute("tabindex", "0");
+            alarmButton.setAttribute("tabindex", "0");
+            pauseButton.setAttribute("tabindex", "0");
+            playButton.setAttribute("tabindex", "0");
+            resetButton.setAttribute("tabindex", "0");
+            closeTimerX.setAttribute("tabindex", "0");
             })                
         })       
     }
@@ -515,6 +568,19 @@ function countdownClickStartHelper(countdownType, countdownNumber){
             let messageElement = document.querySelector('.sttt-modal-p');
             let typeOfTimer = document.querySelector('.timer-title');
 
+            
+            let alarmButton = document.querySelector('#alarm-on');
+            let pauseButton = document.querySelector('#pause');
+            let playButton = document.querySelector('#play');
+            let resetButton = document.querySelector('#reset');
+            let closeTimerX = document.querySelector('.close-timer-x');
+            saveButton.setAttribute("tabindex", "-1");
+            alarmButton.setAttribute("tabindex", "-1");
+            pauseButton.setAttribute("tabindex", "-1");
+            playButton.setAttribute("tabindex", "-1");
+            resetButton.setAttribute("tabindex", "-1");
+            closeTimerX.setAttribute("tabindex", "-1");
+           
             if (playing == true){
                 pauseButton.style.display = "none";
                 playButton.style.display = "inline-block";
@@ -533,6 +599,7 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                 messageElement.textContent = `Do you want to save ${timeInsert} to to to your task: "${thisTask}"? `
                 clearInterval(countdownInt);
             }
+            
             confirmButton.addEventListener('click', function(){
                 saveTimeToTask(timerTitle.id, seconds);
                 //needs to update the time spent display on task list.
@@ -545,14 +612,27 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                         timeDisplay.textContent = list.taskList[timerTitle.id].totalTimeFocusedOnTaskLongForm;
                     }       
                 }
-                saveTimeToTaskModal.style.display = "none"; 
+                saveTimeToTaskModal.style.display = "none";
+                saveButton.setAttribute("tabindex", "0");
+                alarmButton.setAttribute("tabindex", "0");
+                pauseButton.setAttribute("tabindex", "0");
+                playButton.setAttribute("tabindex", "0");
+                resetButton.setAttribute("tabindex", "0");
+                closeTimerX.setAttribute("tabindex", "0");
+
                 removeTimerFromDom();
                 timer.removeOverlay();
                 timer.makeElementsKeyboardTabbableAgain();
                 location.reload();
             })
             negateButton.addEventListener('click', function(){
-                 saveTimeToTaskModal.style.display = "none"; 
+                saveTimeToTaskModal.style.display = "none";
+                saveButton.setAttribute("tabindex", "0");
+                alarmButton.setAttribute("tabindex", "0");
+                pauseButton.setAttribute("tabindex", "0");
+                playButton.setAttribute("tabindex", "0");
+                resetButton.setAttribute("tabindex", "0");
+                closeTimerX.setAttribute("tabindex", "0"); 
             })
             return playing = false; 
         })
@@ -668,8 +748,7 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                                     timer.makeElementsNotKeyboardTabbable();
                                     //add the class for this layout
                                     parentDiv.classList.add('edit-time-task');
-                                   
-
+                 
                                     //select the task description
                                     let taskToTarget = parentDiv.children[2];
                                    
@@ -732,8 +811,6 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                                     let hoursInSeconds = originalHours * 3600;
 
                                     let baseTime = parseInt(originalSeconds) + minutesInSeconds + hoursInSeconds;
-
-                                    console.log(baseTime)
 
                                     //click event listener on the save button. //no need for both save button vars.
                                     let saveBtn = document.querySelector('.edit-time-save-button');
@@ -897,6 +974,16 @@ removeOverlay(){
     let pageBody = document.getElementsByTagName('BODY')[0];
     pageBody.removeChild(overlay);
     }
+addSilentAlarm(){
+    let overlay = document.querySelector('.overlay');
+    overlay.removeAttribute("class", "overlay");
+    overlay.setAttribute("class", "silent-alarm");
+}
+removeSilentAlarm(){
+    let silentAlarm = document.querySelector('.silent-alarm');
+    let pageBody = document.getElementsByTagName('BODY')[0];
+    pageBody.removeChild(silentAlarm);
+}
 makeElementsNotKeyboardTabbable(){
     const addNewTaskButton = document.querySelector('#add-new-task');
     const newTaskInput = document.querySelector('#new-task-input');
@@ -904,6 +991,8 @@ makeElementsNotKeyboardTabbable(){
     const arrayOfSortIcons = document.querySelectorAll('.task-sort');
     const arrayOfOptionIcons = document.querySelectorAll('.task-options');
     let startStopwatchButtonArray = document.querySelectorAll('.start-stopwatch');
+    const skipTasks = document.querySelector('#skip-tasks');
+    let chartsSelectBox = document.querySelector('#chart-selections');
 
     newTaskInput.setAttribute("tabindex", "-1");
     addNewTaskButton.setAttribute("tabindex", "-1");
@@ -919,8 +1008,9 @@ makeElementsNotKeyboardTabbable(){
     arrayOfOptionIcons.forEach(function(optionicon){
         optionicon.setAttribute("tabindex", "-1")
     });
-    let chartsSelectBox = document.querySelector('#chart-selections');
+    skipTasks.setAttribute("tabindex", "-1");
     chartsSelectBox.setAttribute("tabindex", "-1");
+    
 }
 makeElementsKeyboardTabbableAgain(){
     const addNewTaskButton = document.querySelector('#add-new-task');
@@ -929,6 +1019,9 @@ makeElementsKeyboardTabbableAgain(){
     const arrayOfSortIcons = document.querySelectorAll('.task-sort');
     const arrayOfOptionIcons = document.querySelectorAll('.task-options');
     let startStopwatchButtonArray = document.querySelectorAll('.start-stopwatch');
+    const skipTasks = document.querySelector('#skip-tasks');
+    let chartsSelectBox = document.querySelector('#chart-selections');
+    
 
     newTaskInput.setAttribute("tabindex", "0");
     addNewTaskButton.setAttribute("tabindex", "0");
@@ -944,8 +1037,9 @@ makeElementsKeyboardTabbableAgain(){
     arrayOfOptionIcons.forEach(function(optionicon){
         optionicon.setAttribute("tabindex", "0")
     });
-    let chartsSelectBox = document.querySelector('#chart-selections');
-    chartsSelectBox.setAttribute("tabindex", "0");          
+    skipTasks.setAttribute("tabindex", "0");
+    chartsSelectBox.setAttribute("tabindex", "0");
+          
 }
 }
 class Task {
@@ -953,7 +1047,6 @@ class Task {
         this.taskDescription = taskDescription; //obvz - the only essential prop to create a new task obj.
         this.id = null;
         this.completed = false; 
-        this.order = -1; //order of priority in list - will use to structure list order
         this.totalTimeFocusedOnTask = 0; //running total of time focused on a specific task saved in seconds. 
         this.totalTimeFocusedOnTaskLongForm = timer.convertSecondsToTime(this.totalTimeFocusedOnTask);
         this.timeSegments = [];
@@ -977,7 +1070,6 @@ class List {
                     <input class="taskCheckbox" type="checkbox" tabindex=0 checked>
                     <li class="task-description completed" id="${taskList[i].id}">${taskList[i].taskDescription}</li>
                     <a class="task-stopwatch task-list-icon" ><i class="fas fa-stopwatch start-stopwatch" tabindex=0></i></i></a>
-                    <a class="task-sort task-list-icon" tabindex=0><i class="fas fa-sort sort-tasks-icon"></i></a>
                     <a class="task-options task-list-icon" aria-label="task-options-ellipsis" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
                 </div>`;
             } else if(taskList[i].completed === false) {
@@ -987,7 +1079,6 @@ class List {
                     <input class="taskCheckbox" type="checkbox" tabindex=0>
                     <li class="task-description" id="${taskList[i].id}">${taskList[i].taskDescription}</li>
                     <a class="task-stopwatch task-list-icon"><i class="fas fa-stopwatch start-stopwatch"  tabindex=0 ></i></i></a>
-                    <a class="task-sort task-list-icon" tabindex=0><i class="fas fa-sort sort-tasks-icon"></i></a>
                     <a class="task-options task-list-icon" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
                 </div>`;
             }
@@ -1009,10 +1100,17 @@ class List {
             }
         })
         addNewTaskButton.addEventListener('click', function(){ //event listener working. 
-        
+            
             let newTaskInputValue = newTaskInput.value;
 
-            if((newTaskInputValue !== null) && (newTaskInputValue !== "")){
+            function myTrim(x) {
+            return x.replace(/^\s+|\s+$/gm,'');
+            }
+
+            newTaskInputValue = myTrim(newTaskInputValue);
+
+            if((newTaskInputValue !== null) && (newTaskInputValue !== "") ){
+               
                 let newTask = new Task(newTaskInputValue); //creates a new Task obj. & sets its props.
                 newTask.id = list.taskList.length; //it will always be 1to1.
                 newTask.totalTimeFocusedOnTask = 0;
@@ -1024,7 +1122,6 @@ class List {
                     <input class="taskCheckbox" type="checkbox" tabindex=0>
                     <li class="task-description" id="${newTask.id}">${newTask.taskDescription}</li>
                     <a class="task-stopwatch task-list-icon" ><i class="fas fa-stopwatch start-stopwatch" tabindex=0 ></i></i></a>
-                    <a class="task-sort task-list-icon" tabindex=0><i class="fas fa-sort sort-tasks-icon"></i></a>
                     <a class="task-options task-list-icon" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
                 </div>`;
 
@@ -1040,12 +1137,22 @@ class List {
                 timer.timers();
                 location.reload(); //to fix stopwatch click start bug on new tasks that are added.
                
-            } else if ((newTaskInputValue === "") || (newTaskInputValue === null)){ //this doesn't fire with spaces - look into that. 
-                alert("Please add a task."); 
-            }
-            
-        })
-    }
+            } else if ((newTaskInputValue === "") || (newTaskInputValue === null)){
+                
+                let addValidTaskModal = document.getElementById('enter-task-modal');
+                addValidTaskModal.style.display = "block";
+                timer.makeElementsNotKeyboardTabbable();
+                let okButton = document.querySelector('.valid-task-confirm-button');
+
+                okButton.addEventListener('click', function(){
+                
+                addValidTaskModal.style.display = "none";
+                timer.makeElementsKeyboardTabbableAgain();  
+
+            })  
+        }
+    })
+}
     editTask(){
         const ellipsisArray = document.querySelectorAll('.task-options');
         ellipsisArray.forEach(function(ellipsis){
@@ -1132,12 +1239,7 @@ class List {
                         if (task.id == checkboxId){ 
                             task.completed = true;
                             task.timeSegments.push({id:task.id, timeToAdd:0, dateStamp, localTime, localDate, taskDescription: task.taskDescription});
-                            // list.taskList[id].timeSegments.push({id, timeToAdd, dateStamp, taskDescription, localDate, localTime});
-                            
-                            console.log(task.timeSegments)
-                            console.log(list.taskList)
-                        
-                            
+                            // list.taskList[id].timeSegments.push({id, timeToAdd, dateStamp, taskDescription, localDate, localTime});   
                         }
                     })
                         
@@ -1187,7 +1289,6 @@ class List {
                                     for (let i=0; i<arrOfDomTasks.length; i++){
                                         arrOfDomTasks[i].id = i.toString();
                                     }
-
                                     list.setDataToLocalStorage();
                                 }
                             })
@@ -1452,8 +1553,6 @@ function selectChart(data){
             taskDescrip = taskDescrip.slice(0,25) + "...";
         }
         }
-        
-  
         return  `${taskDescrip} : ${d.totalTimeFocusedOnTaskLongForm}`; 
     });
 

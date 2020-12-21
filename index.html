@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0,user-scalable=0">
+    
 
     <script src="https://kit.fontawesome.com/a27a231c02.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
@@ -14,13 +15,14 @@
 
 <body>
 
-    <div class="page-container grid-overlord"> <!--THE RED BORDER IS GRID OVERLORD-->
+    <div class="page-container grid-overlord"> 
     
         <header class="main-header">
             <h1 class="main-heading">Tunnel Focus</h1>
+            <h2 class="sub-heading">Time Your Tasks</h2>
         </header>
 
-         <div class="timer-container" role="dialog"> <!--TIMER GOES HERE: THIS IS A GRID CHILD OF GRID-OVERLORD -->
+         <div class="timer-container" role="dialog"> <!--TIMER GOES HERE -->
 
             <h2 id="" class="timer-task-description"></h2>
             
@@ -43,12 +45,13 @@
             <button class="close-timer-x" tabindex="0"><i class="fas fa-times"></i></button>
         </div>
       
-        <div class="list-container"> <!--TASK LIST GOES HERE: THIS IS A GRID CHILD OF GRID-OVERLORD-->
-            
+        <div class="list-container"> <!--TASK LIST GOES HERE-->
+           
             <div class="add-new-task">
-                <input type="text" id="new-task-input" placeholder="Type to add a new task...">
+                <input type="text" id="new-task-input" placeholder="Type to add a new task..." autofocus>
                 <button id="add-new-task"><i class="fas fa-plus add-new-task-plus-icon"></i></button>
             </div>
+             <a href="#charts-start" id="skip-tasks" tabindex="0">Skip Tasks</a>
 
 
             <div id="list"> 
@@ -81,8 +84,7 @@
 
                 </div>
                 <div id="countdown-ended-modal">
-
-                   <!-- Modal content -->
+                     <!-- Modal content -->
                     <div class="countdown-ended-modal-content">
                         <p class="ce-modal-p">Congrats! You've worked for the full ${countdowntime} minutes! Do you want to save those ${countdownminutes} minutes to the task: ${}?</p>
                         <button class="ce-confirm-button ce-modal-btn" tabindex="0">Yes, Save</button>
@@ -91,7 +93,7 @@
 
                 </div>
 
-                <!-- The close timer Modal -->
+                <!-- The close timer modal -->
                 <div id="close-timer-modal" class="modal">
 
                     <!-- Modal content -->
@@ -99,6 +101,17 @@
                         <p class="close-timer-modal-p">Are you sure you want to exit the timer without saving?</p>
                         <button class="confirm-button close-timer-modal-btn" tabindex="0">Yes, Exit</button>
                         <button class="negate-button close-timer-modal-btn" tabindex="0">No, Cancel</button>
+                    </div>
+
+                </div>
+
+                <!-- The please enter a valid task modal -->
+                <div id="enter-task-modal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <p class="close-timer-modal-p">Please enter a valid task.</p>
+                        <button class="confirm-button close-timer-modal-btn valid-task-confirm-button" tabindex="0">Ok, will do!</button>
                     </div>
 
                 </div>
@@ -110,7 +123,7 @@
                 <h2 class="chart-heading">Productivity Charts</h2>
             </div>
 
-            <div class="custom-select" tabindex="0">
+            <div id="charts-start" class="custom-select" tabindex="-1">
                 <select name="chart-selections" id="chart-selections" tabindex="0">
                     <option id="total-time-focused" value="total-time-focused-on-each-task">Total Time Focused on Each Task</option>
                     <option id="total-time-focused-today" value="total-time-focused-on-each-task-today">Total time Focused on Each Task Today</option>
