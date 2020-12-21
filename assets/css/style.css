@@ -66,13 +66,7 @@
     text-align: center;
 }
 
-/* .main-sub-heading{
-    font-family: "Secular One", sans-serif;
-    font-size: 2.3rem;
-    font-weight: 200;
-    letter-spacing: 8px;
-    text-transform: lowercase;
-} */
+
 
 /*----------------------------------------------------------- Timer  */
 
@@ -399,7 +393,7 @@
     grid-column-gap: 0.5em;
     justify-content: center;
 }
-.task:not(:last-child):after {
+/* .task:not(:last-child):after {
   content:'';
   display:inline-block;
   width:100%; 
@@ -407,8 +401,8 @@
   border-bottom:1px solid var(--pure-black);
   grid-column: 1 / 7;
   margin-top: 11px;
-}
-.task:last-child:after{
+} */
+/* .task:last-child:after{
     content: '';
     display:inline-block;
     width:100%; 
@@ -417,13 +411,13 @@
     grid-column: 1 / 7;
     margin-bottom: -27px;
     
-}
+} */
 .task:last-child{
     padding-bottom: 0.1em;
 }
 li.task-description{
     font-family: "Heebo", sans-serif;
-    font-size: 0.9em;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -472,7 +466,6 @@ li.task-description{
 
 .completed {
     text-decoration: line-through;
-    text-decoration-style: wavy;
     text-decoration-color: var(--pure-black);
 }
 
@@ -536,8 +529,9 @@ li.task-description{
 
 input.editedTask {
     height: 50px;
+    width: 100%;
     font-family: "Heebo", sans-serif;
-    font-size: 0.9em;
+    font-size: 0.7em;
     border: var(--pure-black) solid 2px;
     border-radius: 8px;
     -webkit-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
@@ -549,7 +543,8 @@ input.editedTask {
 }
 
 input.editedTask:focus {
-    outline: none;
+    background-color: var(--dark-blue);
+    outline: var(--sun-yellow) dashed 4px;
 }
 .save-button {
     background-color: var(--sun-yellow);
@@ -558,7 +553,7 @@ input.editedTask:focus {
     color: var(--pure-black);
     font-family: "Heebo", sans-serif;
     font-size: 0.8em;
-    font-weight: 600;
+    font-weight: 400;
     border: 2px solid var(--pure-black);
     border-radius: 8px;
     transition: all 500ms;
@@ -580,14 +575,14 @@ input.editedTask:focus {
     outline: none;
 }
 .save-button:focus{
-    outline: none;
+    outline: var(--dark-blue) dashed 4px;
 }
 
 /*----------------------------------------------------------- Manually Edit Task Time  */
 
 .edit-time-task {
     font-family: "Roboto", sans-serif;
-    font-size: 1.3em;
+    font-size: 1em;
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
@@ -596,29 +591,32 @@ input.editedTask:focus {
     border-radius: 8px;
     padding: 1em;
     background-color: var(--pure-white);
-    /* justify-items: center; */
-    -webkit-box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
+    justify-items: center;
+    /* -webkit-box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
-    box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
+    box-shadow: 8px 10px 0px 0px rgba(0,0,0,1); */
 }
 
 input.editTime{
-    height: 50px;
+    height: 35px;
+    width: 50px;
     font-family: "Heebo", sans-serif;
     font-size: 0.9em;
     border: var(--pure-black) solid 2px;
     border-radius: 8px;
-    -webkit-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
+    /* -webkit-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
-    box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
+    box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1); */
     transition: all 1000ms;
     padding: 4px;
     background-color: var(--light-blue);
 }
 
-/* .edit-time-task-title{
-    font-family: "Heebo", sans-serif;  
-} */
+input.editTime:focus {
+    background-color: var(--dark-blue);
+}
+
+
 .edit-time-task-description{
     font-family: "Heebo", sans-serif;
     order: 1;
@@ -626,11 +624,15 @@ input.editTime{
     text-align: center;
     padding: 1em;
     text-transform: capitalize;
+    /* font-size: 0.7em; */
 }
 .edit-time-hours-label,
 .edit-time-minutes-label,
 .edit-time-seconds-label{
     color: var(--pure-black);
+    width: 50%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 .edit-time-hours-label{
   order: 2;
@@ -638,18 +640,21 @@ input.editTime{
 }
 .edit-time-hours{
     order: 3;
+   
 }
 .edit-time-minutes-label{
     order: 4;
 }
 .edit-time-minutes{
     order: 5;
+    
 }
 .edit-time-seconds-label{
     order: 6;
 }
 .edit-time-seconds{
     order: 7;
+    
 }
 .edit-time-save-button{
   order: 8;  
@@ -662,18 +667,18 @@ input.editTime{
 .edit-time-cancel-button{
     background-color: var(--sun-yellow);
     padding: 0.4em;
-    height: 50px;
-    flex-basis: 20%;
-    margin: 30px;
+    width: 40%;
+    /* flex-basis: 20%; */
+    margin: 10px 0 10px 0;
     color: var(--pure-black);
     font-family: "Heebo", sans-serif;
     font-size: 0.8em;
-    font-weight: 600;
+    font-weight: 400;
     border: 2px solid var(--pure-black);
     border-radius: 8px;
-    -webkit-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
+    /* -webkit-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
     -moz-box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
-    box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1);
+    box-shadow: 1.5px 3px 0px 0px rgba(0,0,0,1); */
     transition: all 1000ms;
 }
 
@@ -695,7 +700,7 @@ input.editTime{
 
 .edit-time-save-button:focus,
 .edit-time-cancel-button:focus{
-    outline: none;
+    outline: var(--dark-blue) dashed 4px;
 }
 
 /*----------------------------------------------------------- Charts   */
@@ -777,7 +782,7 @@ input.editTime{
 }
 
 #chart-selections:focus{
-    outline: none;
+    outline: var(--dark-blue) 4px dashed;
 }
 
 #charts{
@@ -811,7 +816,7 @@ svg {
 
 svg.legend-area{
     font-family: "Heebo", sans-serif;
-    font-size: 0.9em;
+    font-size: 0.75em;
 }
 .extra-buttons{
     grid-row: 4 / 5;
@@ -844,7 +849,7 @@ div.tooltip-donut {
 .legend-area {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: fit-content;
     margin: 0 auto;
 }
 
@@ -883,8 +888,7 @@ div.tooltip-donut {
   padding: 20px;
   border: 2px solid var(--pure-black);
   border-radius: 8px;
-  width: 350px;
-  height: 150px;
+  width: 90%;
   font-family: "Heebo", sans-serif;
   font-weight: 400;
   display: flex;
@@ -936,6 +940,14 @@ div.tooltip-donut {
     border: 2px solid var(--pure-white);
 }
 
+.confirm-button:focus,
+.sttt-confirm-button:focus,
+.ce-confirm-button:focus,
+.negate-button:focus,
+.sttt-negate-button:focus,
+.ce-negate-button:focus {
+    outline: var(--dark-blue) dashed 4px;
+}
 
 /*----------------------------------------------------------- Footer   */
 
@@ -1001,6 +1013,16 @@ footer {
     -moz-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
     box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
 }
+/*----------------------------------------------------------- Edit Task - Small Screens  */
+input.editedTask {
+    
+    width: 100%;
+    font-size: 0.9em;
+}
+.save-button {
+    font-size: 0.8em;
+    font-weight: 600;
+}
 /*----------------------------------------------------------- Task List - Small Screens  */
 #list {
     border: 2px solid var(--pure-black);
@@ -1020,7 +1042,7 @@ footer {
     grid-column-gap: 0.5em;
     justify-content: center;
 }
-.task:not(:last-child):after {
+/* .task:not(:last-child):after {
   content:'';
   display:inline-block;
   width:100%; 
@@ -1038,7 +1060,7 @@ footer {
     grid-column: 1 / 13;
     margin-bottom: -27px;
     
-}
+} */
 .task:last-child{
     padding-bottom: 0.1em;
 }
@@ -1060,6 +1082,41 @@ footer {
   .taskCheckbox:checked::before {
     left: 0.45rem;
     top: 0.2rem;
+}
+/* Modal Content/Box */
+.modal-content,
+.sttt-modal-content,
+.countdown-ended-modal-content {
+  border: 2px solid var(--pure-black);
+  border-radius: 8px;
+  width: 350px;
+  height: 150px;
+  -webkit-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
+  box-shadow: 3px 5px 0px 0px rgba(0,0,0,1);
+}
+/*----------------------------------------------------------- Manually Edit Task Time - Small Screens  */
+
+.edit-time-task {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.3em;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    align-items: center;
+    border: solid 2px var(--pure-black);
+    border-radius: 8px;
+    padding: 1em;
+    background-color: var(--pure-white);
+    /* justify-items: center; */
+    -webkit-box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
+    box-shadow: 8px 10px 0px 0px rgba(0,0,0,1);
+}
+
+input.editTime{
+    height: 50px;
+    width: 150px;
 }
 /*----------------------------------------------------------- Charts - Small Screens  */
 #charts{
@@ -1197,6 +1254,7 @@ div.tooltip-donut {
 .legend-area{
     grid-row: 1/2;
     grid-column: 2/3;
+    width: -webkit-fill-available;
 }
 
 .completed-tasks{
@@ -1214,6 +1272,10 @@ div.tooltip-donut {
 
 .main-heading {
     font-size: 3.3rem;
+}
+/*----------------------------------------------------------- Charts Extra-Large Screens  */
+svg.legend-area{
+    font-size: 0.9em;
 }
 
 }

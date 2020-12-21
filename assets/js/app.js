@@ -367,7 +367,7 @@ function countdownClickStartHelper(countdownType, countdownNumber){
             return playing = false;  
         })
     }
-    function resetTime(intervalToReset,){
+    function resetTime(intervalToReset){ //,?
         resetButton.addEventListener('click', function(){
             clearInterval(intervalToReset);
             pauseButton.style.display = "none";
@@ -668,6 +668,7 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                                     timer.makeElementsNotKeyboardTabbable();
                                     //add the class for this layout
                                     parentDiv.classList.add('edit-time-task');
+                                   
 
                                     //select the task description
                                     let taskToTarget = parentDiv.children[2];
@@ -870,17 +871,6 @@ function countdownClickStartHelper(countdownType, countdownNumber){
                 })
             })
         }  
-    // function addOverlay(){
-    //     let pageBody = document.getElementsByTagName('BODY')[0]
-    //     let overlayEl = document.createElement("DIV");
-    //     overlayEl.setAttribute("class", "overlay");
-    //     pageBody.appendChild(overlayEl);
-    // }
-    // function removeOverlay(){
-    //     let overlay = document.querySelector('.overlay');
-    //     let pageBody = document.getElementsByTagName('BODY')[0];
-    //     pageBody.removeChild(overlay);
-    // }
         countDown15ClickStart(); 
         countDown25ClickStart();   
         stopWatchClickStart(); 
@@ -1048,7 +1038,7 @@ class List {
                 list.setDataToLocalStorage();
                 list.dynamicPopoverNav();
                 timer.timers();
-                location.reload(); //to fix stopwatch click start bug on new tasks that are added. ASK FEMI
+                location.reload(); //to fix stopwatch click start bug on new tasks that are added.
                
             } else if ((newTaskInputValue === "") || (newTaskInputValue === null)){ //this doesn't fire with spaces - look into that. 
                 alert("Please add a task."); 
@@ -1086,7 +1076,7 @@ class List {
                                         saveButton.setAttribute("class", "save-button");
                                         saveButton.setAttribute("type", "submit");
                                         saveButton.style.zIndex="1001";
-                                        saveButton.textContent = "Save Changes";
+                                        saveButton.textContent = "Save";
                                         newInput.after(saveButton);
                                     }
 
@@ -1198,7 +1188,6 @@ class List {
                                         arrOfDomTasks[i].id = i.toString();
                                     }
 
-
                                     list.setDataToLocalStorage();
                                 }
                             })
@@ -1295,6 +1284,7 @@ class List {
                 plugins: [hideOnPopperBlur, hideOnEsc, hideOnOptionSelect], 
             });         
         }
+
         setDataToLocalStorage(){
             window.localStorage.setItem("taskList", JSON.stringify(list.taskList));
         }
@@ -1453,9 +1443,16 @@ function selectChart(data){
     .attr('y', legendRectSize - legendSpacing)
     .text(function (d) {  
         let taskDescrip = d.taskDescription;
-        if (taskDescrip.length > 50){
-            taskDescrip = taskDescrip.slice(0,50) + "...";
+        if(window.innerWidth < 781) {
+            if (taskDescrip.length > 15){
+            taskDescrip = taskDescrip.slice(0,15) + "...";
         }
+        } else {
+            if (taskDescrip.length > 25){
+            taskDescrip = taskDescrip.slice(0,25) + "...";
+        }
+        }
+        
   
         return  `${taskDescrip} : ${d.totalTimeFocusedOnTaskLongForm}`; 
     });
@@ -1543,7 +1540,6 @@ function getTodayTasks(){
     todaysTasksFiltered.forEach(task => task.totalTimeFocusedOnTask = task.timeToAdd);
     
     todaysTasksFiltered.forEach(task => task.totalTimeFocusedOnTaskLongForm = timer.convertSecondsToTime(task.totalTimeFocusedOnTask));
-    // console.log(todaysTasksFiltered)
     return todaysTasksFiltered;
     
 }
@@ -1604,4 +1600,15 @@ function responsivefy(svg) {
       svg.attr('width', w);
       svg.attr('height', Math.round(w / aspect));
   }
+
 }
+
+/* The resize code below that specifically targets screen width change. 
+Taken from: https://stackoverflow.com/questions/10750603/detect-a-window-width-change-but-not-a-height-change */
+// window.onresize = function() {
+//     let lastWidth;
+// 	if (window.innerWidth != lastWidth) {
+// 		location.reload();
+// 		lastWidth = window.innerWidth;
+// 	}
+// };
