@@ -36,12 +36,14 @@ function confirmDeletion(){
         confirmDeletionModal.style.display = "none";
         list.setDataToLocalStorage();
         timer.makeArrayElementsKeyboardTabbableAgain();
+        location.reload()
 }
 
 function negateDeletion(){
     confirmDeletionModal.style.display = "none";
     timer.makeArrayElementsKeyboardTabbableAgain(); 
     taskToDel = "";
+    location.reload();
 }
 
 // CLASSES 
@@ -1305,12 +1307,22 @@ class List {
 
                         //For the delete task button inside the selected ellipsis
                          const deleteTaskButton = document.querySelector('.delete-task-option');
+
+                         deleteTaskButton.addEventListener('keyup', function(event) {
+                                if (event.keyCode === 13) {
+                                    event.preventDefault();
+                                    deleteTaskButton.click();                           
+                                }
+                            });
+                        alert(deleteTaskButton)
+                        deleteTaskButton.addEventListener('click', function() {
+                            alert("Clicked on delete");
                          
                          //for either a click or keyup record the specific event (e) that was clicked on
-                        ['click','keyup'].forEach(function(e){ 
+                        // ['click','keyup'].forEach(function(e){ 
                             //add an event listener to that specific delete button pertaining to that ellipsis and if the event is a click or an enter key then run the logic: 
-                            deleteTaskButton.addEventListener(e, function(event){
-                                if((e === 'click') || (event.keyCode === 13)) {
+                            // deleteTaskButton.addEventListener(e, function(event){
+                            //     if((e === 'click') || (event.keyCode === 13)) {
 
                                     
                                     taskToDel = event.target.closest('.task');
@@ -1328,17 +1340,12 @@ class List {
                                     confirmDeletionModal.style.display = "block";
                                     messageElement.textContent = `Are you sure you want to delete ${taskNameToDelete}?`;
                                      
-                                    
-                                    
-                                    
                                     // list.setDataToLocalStorage();
-                                }
-                            })
-                        })
-                    }
-                })
-            })
-        }) 
+                                });
+                            }
+                        });
+                    });
+                });
     } 
         dynamicPopoverNav(){   
             // This code is all taken exactly as written from the tippy.js documentation including the hideOnPopperBlur plugin directly below 
