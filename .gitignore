@@ -4,3 +4,44 @@ core.python*
 env.py
 __pycache__/
 *.py[cod]
+
+
+deleteTask(){
+        const ellipsisArray = document.querySelectorAll('.task-options');
+        //for each ellipsis icon on the main page attach two listeners - one for clicks, one for keyboard
+        ellipsisArray.forEach(function(ellipsis){
+            ['click','keyup'].forEach(function(evt){
+
+                //for each of those add a handler on the specific ellipsis icon clicked and attach 2 event handlers - one for clicks and one for the tab key
+                ellipsis.addEventListener(evt, function(elipEvent){
+                    if((evt === 'click') || (elipEvent.keyCode === 9)) {
+
+                        //For the delete task button inside the selected ellipsis
+                         const deleteTaskButton = document.querySelector('.delete-task-option');
+
+                         deleteTaskButton.addEventListener('keyup', function(event) {
+                                if (event.keyCode === 13) {
+                                    event.preventDefault();
+                                    deleteTaskButton.click();                           
+                                }
+                            });
+                        deleteTaskButton.addEventListener('click', function() {
+                            alert("Clicked on delete");
+                                    taskToDel = event.target.closest('.task');
+                                    let messageElement = document.querySelector('.confirm-deletion-modal-p');
+                                    let taskNameToDelete = taskToDel.children[2].textContent;  
+                                    alert(`${taskNameToDelete}  1st pass`);  
+
+                                    timer.makeArrayElementsNotKeyboardTabbable();
+
+                                    //Bring up the modal
+                                    confirmDeletionModal.style.display = "block";
+                                    messageElement.textContent = `Are you sure you want to delete ${taskNameToDelete}?`;
+                                     
+                                    // list.setDataToLocalStorage();
+                                });
+                            }
+                        });
+                    });
+                });
+    } 
