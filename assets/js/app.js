@@ -1314,25 +1314,12 @@ class List {
                                     deleteTaskButton.click();                           
                                 }
                             });
-                        alert(deleteTaskButton)
                         deleteTaskButton.addEventListener('click', function() {
                             alert("Clicked on delete");
-                         
-                         //for either a click or keyup record the specific event (e) that was clicked on
-                        // ['click','keyup'].forEach(function(e){ 
-                            //add an event listener to that specific delete button pertaining to that ellipsis and if the event is a click or an enter key then run the logic: 
-                            // deleteTaskButton.addEventListener(e, function(event){
-                            //     if((e === 'click') || (event.keyCode === 13)) {
-
-                                    
                                     taskToDel = event.target.closest('.task');
-                                    
-                                    
-                                    // let confirmDeletionModal = document.getElementById('confirm-deletion-modal');
-                                   
                                     let messageElement = document.querySelector('.confirm-deletion-modal-p');
                                     let taskNameToDelete = taskToDel.children[2].textContent;  
-                                    console.log(`${taskNameToDelete}  1st pass`);  
+                                    alert(`${taskNameToDelete}  1st pass`);  
 
                                     timer.makeArrayElementsNotKeyboardTabbable();
 
