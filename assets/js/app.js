@@ -1,5 +1,4 @@
 
-  
 // --------------------------------------GLOBAL VARIABLES-------------------------------//
 var taskToDel = "";
 let confirmDeletionModal = document.getElementById('confirm-deletion-modal');
@@ -35,8 +34,7 @@ function confirmDeletion() {
 	}
 	confirmDeletionModal.style.display = "none";
 	list.setDataToLocalStorage();
-    timer.makeArrayElementsKeyboardTabbableAgain();
-    location.reload()
+	timer.makeArrayElementsKeyboardTabbableAgain();
 }
 /**
  * This function runs when a user cancels a task deletion. 
@@ -45,8 +43,7 @@ function confirmDeletion() {
 function negateDeletion() {
 	confirmDeletionModal.style.display = "none";
 	timer.makeArrayElementsKeyboardTabbableAgain();
-    taskToDel = "";
-    location.reload();
+	taskToDel = "";
 }
 // --------------------------------------CLASSES-------------------------------//
 class Timer {
@@ -1149,7 +1146,7 @@ class Timer {
 	 * If the X close button is clicked the pages reverts as it was before.
 	 */
 	appInformation() {
-		let infoIcon = document.querySelector('.fa-question-circle');
+		let infoIcon = document.querySelector('#info');
 		let infoModal = document.querySelector('#information-modal');
 		infoIcon.addEventListener('keyup', function(event) {
 			if (event.keyCode === 13) {
@@ -1198,16 +1195,16 @@ class List {
                     <p class="total-task-time">${taskList[i].totalTimeFocusedOnTaskLongForm}</p>
                     <input class="taskCheckbox" type="checkbox" tabindex=0 aria-label="checkbox" checked>
                     <li class="task-description completed" id="${taskList[i].id}">${taskList[i].taskDescription}</li>
-                    <a class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch"><i class="fas fa-stopwatch start-stopwatch" tabindex=0 ></i></a>
-                    <a class="task-options task-list-icon" aria-label="task-options-ellipsis" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
+                    <button class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch"><i class="fas fa-stopwatch start-stopwatch" tabindex=0  ></i></button>
+                    <button class="task-options task-list-icon" aria-hidden="false" aria-label="more options"" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></button>
                 </div>`;
 			} else if (taskList[i].completed === false) {
 				document.getElementById('list').innerHTML += `<div class="task">
                     <p class="total-task-time">${taskList[i].totalTimeFocusedOnTaskLongForm}</p>
                     <input class="taskCheckbox" type="checkbox" tabindex=0 aria-label="checkbox">
                     <li class="task-description" id="${taskList[i].id}">${taskList[i].taskDescription}</li>
-                    <a class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch"><i class="fas fa-stopwatch start-stopwatch" tabindex=0  ></i></a>
-                    <a class="task-options task-list-icon" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
+                    <button class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch" ><i class="fas fa-stopwatch start-stopwatch" tabindex=0   ></i></button>
+                    <button class="task-options task-list-icon" tabindex=0 aria-hidden="false" aria-label="more options"><i class="fas fa-ellipsis-v task-options-icon"></i></button>
                 </div>`;
 			}
 		}
@@ -1251,8 +1248,8 @@ class List {
                     <p class="total-task-time">${newTask.totalTimeFocusedOnTaskLongForm}</p>
                     <input class="taskCheckbox" type="checkbox" tabindex=0 aria-label="checkbox">
                     <li class="task-description" id="${newTask.id}">${newTask.taskDescription}</li>
-                    <a class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch" ><i class="fas fa-stopwatch start-stopwatch" tabindex=0 ></i></a>
-                    <a class="task-options task-list-icon" tabindex=0><i class="fas fa-ellipsis-v task-options-icon"></i></a>
+                    <button class="task-stopwatch task-list-icon" aria-hidden="false" aria-label="start stopwatch"  ><i class="fas fa-stopwatch start-stopwatch" aria-label="start stopwatch"  tabindex=0 ></i></button>
+                    <button class="task-options task-list-icon" tabindex=0 aria-hidden="false" aria-label="more options"><i class="fas fa-ellipsis-v task-options-icon"></i></button>
                 </div>`;
 				document.querySelector('#new-task-input').value = "";
 				list.toggleTaskComplete(list.taskList);

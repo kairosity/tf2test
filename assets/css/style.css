@@ -1,5 +1,4 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Secular+One&display=swap');
 * {
 	-webkit-box-sizing: border-box;
@@ -271,7 +270,10 @@ h2.sub-heading {
 	top: 15px;
 	right: 15px;
 	font-size: 2em;
-	cursor: pointer;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 #information-modal {
 	width: 85%;
@@ -421,9 +423,12 @@ h2.sub-heading {
 	-ms-grid-column-align: center;
 	justify-self: center;
 }
-.timer-controls a {
+.timer-controls button {
 	color: var(--pure-white);
-	font-size: 2em;
+    font-size: 2em;
+    outline: none;
+    border: none;
+    background-color: transparent;
 }
 .timer-box h2 {
 	font-family: "Heebo", sans-serif;
@@ -855,35 +860,38 @@ li.task-description {
 .start-stopwatch, .task-options-icon {
 	cursor: pointer;
 }
-.sort-tasks-icon {
-	cursor: -webkit-grab;
-	cursor: grab;
+.task button.task-list-icon{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    appearance: none;
+    font-size: 1em;
 }
-.task:nth-of-type(9n+1) {
+.task:nth-of-type(9n+1) button {
 	color: var(--dark-blue);
 }
-.task:nth-of-type(9n+2) {
+.task:nth-of-type(9n+2) button {
 	color: var(--light-blue);
 }
-.task:nth-of-type(9n+3) {
+.task:nth-of-type(9n+3) button{
 	color: var(--grass-green);
 }
-.task:nth-of-type(9n+4) {
+.task:nth-of-type(9n+4) button{
 	color: var(--sun-yellow);
 }
-.task:nth-of-type(9n+5) {
+.task:nth-of-type(9n+5) button {
 	color: var(--orange);
 }
-.task:nth-of-type(9n+6) {
+.task:nth-of-type(9n+6) button {
 	color: var(--coral);
 }
-.task:nth-of-type(9n+7) {
+.task:nth-of-type(9n+7) button {
 	color: var(--happy-pink);
 }
-.task:nth-of-type(9n+8) {
+.task:nth-of-type(9n+8) button {
 	color: var(--purple-blush);
 }
-.task:nth-of-type(9n+9) {
+.task:nth-of-type(9n+9) button {
 	color: var(--strong-lavendar);
 }
 li.task-description {
@@ -1081,7 +1089,14 @@ input.editTime:focus {
 	outline: var(--dark-blue) dashed 4px;
 }
 /*----------------------------------------------------------- Charts   */
-
+#chart-label,
+#chart-selections-label,
+#total-time-focused-label,
+#total-time-focused-today-label,
+#tasks-completed-label,
+#tasks-completed-today-label{
+    display: none;
+}
 .focus-summary-container {
 	-ms-grid-row: 7;
 	-ms-grid-row-span: 1;
